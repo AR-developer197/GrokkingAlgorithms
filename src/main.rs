@@ -24,10 +24,41 @@ fn search(list: Vec<i32>, num: i32) -> Option<i32>{
     found
 }
 
+//chap 2 selection sort
+fn find_smallest(list: &Vec<i32>)  -> usize{
+    let mut current_smallest_index = 0;
+    let mut current_smallest_element = list[0];
+
+    for (i, num) in list.iter().enumerate().skip(1) {
+        if &current_smallest_element > num {
+            current_smallest_index = i;
+            current_smallest_element = list[i];
+        }
+    }
+
+    println!("{}", current_smallest_index);
+
+    current_smallest_index
+}
+
+fn selection_sort(mut list: Vec<i32>) -> Vec<i32>{
+    let mut new_list: Vec<i32> = Vec::new();
+
+    for _ in list.clone() {
+        let smallest = find_smallest(&list);
+        new_list.push(list.remove(smallest));
+    }
+
+    new_list
+}
+
 fn main() {
     //chap 1 binary search
-    let s = search(vec![5, 10, 15, 20, 25], 0);
-    println!("{:#?}", s);
+    search(vec![5, 10, 15, 20, 25], 0);
 
+    let mut list = vec![4,9,8,10, 2];
     
+    let s = selection_sort(list);
+
+    println!("{:#?}", s);
 }
