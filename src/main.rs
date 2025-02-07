@@ -52,6 +52,15 @@ fn selection_sort(mut list: Vec<i32>, mut new_list: Vec<i32>) -> Vec<i32>{
     }
 }
 
+//chap 3 recursion
+fn factorial(x: i32) -> i32{
+    if x == 1 {
+        return x;
+    } else {
+        return x*factorial(x-1);
+    }
+}
+
 fn main() {
     //chap 1 binary search
     search(vec![5, 10, 15, 20, 25], 0);
@@ -60,5 +69,9 @@ fn main() {
     let list = vec![4,9,8,10, 2];
     let new_list: Vec<i32> = Vec::new();
     selection_sort(list, new_list);
+
+    //chap 3 recursion
+    let n = factorial(3);
+    println!("{}", n);
 
 }
