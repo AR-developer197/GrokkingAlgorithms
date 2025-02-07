@@ -36,29 +36,29 @@ fn find_smallest(list: &Vec<i32>)  -> usize{
         }
     }
 
-    println!("{}", current_smallest_index);
-
     current_smallest_index
 }
 
-fn selection_sort(mut list: Vec<i32>) -> Vec<i32>{
-    let mut new_list: Vec<i32> = Vec::new();
-
-    for _ in list.clone() {
+fn selection_sort(mut list: Vec<i32>, mut new_list: Vec<i32>) -> Vec<i32>{
+    if list.len() == 0 { 
+        return new_list;
+    } else {
         let smallest = find_smallest(&list);
         new_list.push(list.remove(smallest));
-    }
 
-    new_list
+        let sorted_list = selection_sort(list, new_list);
+
+        return sorted_list;
+    }
 }
 
 fn main() {
     //chap 1 binary search
     search(vec![5, 10, 15, 20, 25], 0);
 
-    let mut list = vec![4,9,8,10, 2];
-    
-    let s = selection_sort(list);
+    //chap 2 selection sort
+    let list = vec![4,9,8,10, 2];
+    let new_list: Vec<i32> = Vec::new();
+    selection_sort(list, new_list);
 
-    println!("{:#?}", s);
 }
