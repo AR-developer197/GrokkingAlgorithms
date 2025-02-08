@@ -1,3 +1,5 @@
+use std::vec;
+
 
 //chap 1 binary search
 fn search(list: Vec<i32>, num: i32) -> Option<i32>{
@@ -61,6 +63,35 @@ fn factorial(x: i32) -> i32{
     }
 }
 
+//chap 4 D&C
+fn sum(numbers: Vec<i32>) -> i32 {
+    if numbers.len() > 1 {
+        let sum = numbers[0] + sum(numbers[1..].to_vec());
+        return sum;
+    } else {
+        return numbers[0];
+    }
+}
+
+//chap 4 quicksort
+
+fn quicksort(list: Vec<i32>) -> Vec<i32> {
+    if list.len() > 1 {
+        let less: Vec<i32> = list.iter().filter(|x| x < &&list[0]).cloned().collect();
+        let greater: Vec<i32> = list.iter().filter(|x| x > &&list[0]).cloned().collect();
+
+        let mut new_list: Vec<i32> = Vec::new();
+
+        new_list.extend(quicksort(less));
+        new_list.push(list[0]);
+        new_list.extend(quicksort(greater));
+
+        return new_list;
+    } else {
+        return list;
+    }
+}
+
 fn main() {
     //chap 1 binary search
     search(vec![5, 10, 15, 20, 25], 0);
@@ -71,7 +102,13 @@ fn main() {
     selection_sort(list, new_list);
 
     //chap 3 recursion
-    let n = factorial(3);
-    println!("{}", n);
+    factorial(3);
 
+    //chap 4 
+    let summ = vec![1, 2, 3, 4, 5];
+    sum(summ);
+
+    let quicksort_list = vec![3, 5, 2, 1, 4, 1000, 24];
+    let sorted_list = quicksort(quicksort_list);
+    println!("{:#?}", sorted_list)
 }
