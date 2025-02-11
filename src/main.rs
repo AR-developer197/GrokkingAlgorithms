@@ -74,7 +74,6 @@ fn sum(numbers: Vec<i32>) -> i32 {
 }
 
 //chap 4 quicksort
-
 fn quicksort(list: Vec<i32>) -> Vec<i32> {
     if list.len() > 1 {
         let less: Vec<i32> = list.iter().filter(|x| x < &&list[0]).cloned().collect();
@@ -104,11 +103,10 @@ fn main() {
     //chap 3 recursion
     factorial(3);
 
-    //chap 4 
+    //chap 4 D&C and Quicksort
     let summ = vec![1, 2, 3, 4, 5];
     sum(summ);
 
     let quicksort_list = vec![3, 5, 2, 1, 4, 1000, 24];
-    let sorted_list = quicksort(quicksort_list);
-    println!("{:#?}", sorted_list)
+    quicksort(quicksort_list);
 }
