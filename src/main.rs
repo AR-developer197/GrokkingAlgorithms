@@ -1,4 +1,4 @@
-use std::vec;
+use std::{hash::{DefaultHasher, Hash, Hasher}, io::StderrLock, vec};
 
 
 //chap 1 binary search
@@ -91,6 +91,44 @@ fn quicksort(list: Vec<i32>) -> Vec<i32> {
     }
 }
 
+//chapter 5
+struct HashMap {
+    arr: [Option<String>; 256]
+}
+
+impl HashMap {
+    fn new() -> Self{
+        Self {
+            arr: [const { None }; 256]
+        }
+    }
+
+    fn put(&mut self, key: usize, value: String) {
+        let mut hasher = DefaultHasher::new();
+        key.hash(&mut hasher);
+
+        let hash_val = hasher.finish() as usize;
+
+        let index = hash_val % self.arr.len();
+
+        self.arr[index] = Some(value)   
+    }
+
+    fn get(&self, key: usize) {
+        let mut hasher = DefaultHasher::new();
+        key.hash(&mut hasher);
+
+        let hash_val = hasher.finish() as usize;
+
+        let index = hash_val % self.arr.len();
+
+        match &self.arr[index] {
+            Some(val) => println!("{:#?}", val),
+            None => todo!(),
+        };
+    }
+}
+
 fn main() {
     //chap 1 binary search
     search(vec![5, 10, 15, 20, 25], 0);
@@ -109,4 +147,10 @@ fn main() {
 
     let quicksort_list = vec![3, 5, 2, 1, 4, 1000, 24];
     quicksort(quicksort_list);
+
+    //chap 5 hashmap
+
+    let mut hashmap = HashMap::new();
+    hashmap.put(10, "s".to_owned());
+    let val = hashmap.get(10);
 }
